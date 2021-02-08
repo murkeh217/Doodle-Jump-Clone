@@ -10,3 +10,5 @@ Features:
 7. Object Pooling
 8. Score count
 9. Death
+10. Breakable Platform
+11. Moving Platform

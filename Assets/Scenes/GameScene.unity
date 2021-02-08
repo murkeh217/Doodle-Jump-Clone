@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 128078731}
   - component: {fileID: 128078729}
   - component: {fileID: 128078730}
-  - component: {fileID: 128078734}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -274,21 +273,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &128078734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128078728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2996fbd113edc764eb39561bd81b911b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 128078728}
-  offset: 5
-  offsetSmoothing: 0
 --- !u!1 &479475410
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +461,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -492,6 +477,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2996fbd113edc764eb39561bd81b911b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 128078728}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -560,6 +558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7653685351574598905, guid: 94f269e8bf15da141a1657310d53ddf0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7653685351574598910, guid: 94f269e8bf15da141a1657310d53ddf0,
         type: 3}
@@ -923,7 +926,12 @@ PrefabInstance:
     - target: {fileID: 7653685351574598905, guid: 94f269e8bf15da141a1657310d53ddf0,
         type: 3}
       propertyPath: m_Name
-      value: Platform (3)
+      value: Platform (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7653685351574598905, guid: 94f269e8bf15da141a1657310d53ddf0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7653685351574598910, guid: 94f269e8bf15da141a1657310d53ddf0,
         type: 3}
@@ -1143,7 +1151,12 @@ PrefabInstance:
     - target: {fileID: 7653685351574598905, guid: 94f269e8bf15da141a1657310d53ddf0,
         type: 3}
       propertyPath: m_Name
-      value: Platform (5)
+      value: Platform (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7653685351574598905, guid: 94f269e8bf15da141a1657310d53ddf0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7653685351574598910, guid: 94f269e8bf15da141a1657310d53ddf0,
         type: 3}
@@ -1274,6 +1287,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7653685351574598905, guid: 94f269e8bf15da141a1657310d53ddf0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7653685351574598910, guid: 94f269e8bf15da141a1657310d53ddf0,
         type: 3}

@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // this will keep camera locked on player and only move along y axis
         transform.position = new Vector3(transform.position.x, GameObject.Find("Player").transform.position.y, transform.position.z) ;
     }
 }

@@ -1,24 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bounce : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        //adds a force to the player on coming in contact with platform
         if(collision.gameObject.GetComponent<Rigidbody2D>().velocity.y <= 0)
         {
 

@@ -4,21 +4,9 @@ using UnityEngine;
 
 public class BigBounce : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        //this bounce is bit greater than normal bounce
         if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.y <= 0)
         {
 

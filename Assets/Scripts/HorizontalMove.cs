@@ -11,7 +11,7 @@ public class HorizontalMove: MonoBehaviour
 
     void Update()
     {
-		
+		//to move platform right to left
 				if (transform.position.x > 4f)
 					moveRight = false;
 				if (transform.position.x < -4f)

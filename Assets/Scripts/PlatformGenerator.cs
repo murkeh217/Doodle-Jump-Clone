@@ -2,109 +2,148 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class PlatformGenerator : MonoBehaviour
-{ 
+{
     public Text text;
+
     public GameObject player;
     public GameObject platformPrefab;
     public GameObject springPrefab;
     public GameObject movingHorizontalPrefab;
     public GameObject movingVerticalPrefab;
     public GameObject breakablePrefab;
-    public GameObject myPlat;
+    public GameObject platGen;
+
+    /*
+     * Object pooling implementation
+     *
+    //public GameObject platformPrefab;
+    public List<GameObject> platform;
+    int noOfPlatforms = 20;
+
+    public float levelWidth = 3f;
+    public float minY = .2f;
+    public float maxY = 1.5f;
+    static int counter;
+
+    public Camera mainCam;
+
+    void Start()
+    {
+        mainCam = Camera.main;
+        //Platform generate wrt the camera
+        counter = 1;
+        for (int i = 0; i < noOfPlatforms; i++)
+        {
+            //putting all prefabs in an array so that they can be accessed randomly
+            var prefabs = new[] { platformPrefab, springPrefab, movingHorizontalPrefab, movingVerticalPrefab, breakablePrefab };
+            var index = Random.Range(0, prefabs.Length);
+            var temp = Instantiate(prefabs[index]);
+            temp.SetActive(false);
+            platform.Add(temp);
+        }
+
+            platform[0].transform.position = new Vector3(Random.Range(-levelWidth, levelWidth), Random.Range(minY, maxY), 0);
+            platform[0].SetActive(true);
+            CreateNextPlatforms(platform[0].transform.position.y);
+        
+    }
+
+    public void CreateNextPlatforms(float currentPlatformPos)
+    {
+        int numbers = Random.Range(1, 5);
+        for (int i = 0; i <= numbers; i++)
+        {
+            if (counter < noOfPlatforms)
+            {
+                GameObject plat = platform[counter];
+                if (!plat.activeInHierarchy)
+                {
+                    plat.transform.position = GetNewPosition();
+                    plat.SetActive(true);
+                    counter++;
+                }
+            }
+            else
+            {
+                counter = 0;
+            }
+        }
+
+        /*To deactivate the older platforms
+        for (int i = 0; i < noOfPlatforms; i++)
+        {
+            GameObject plat = platform[i];
+            if (plat.activeInHierarchy && plat.transform.position.y < currentPlatformPos - 10f)
+            {
+                plat.SetActive(false);
+            }
+        }
+        Debug.Log(counter);
+
+    }
+
+    Vector3 GetNewPosition()
+    {
+        float xPos = Random.Range(-levelWidth, levelWidth);
+        float zPos = 0f;
+        float yPos = 0f;
+        if (counter < 1)
+        {
+            yPos = Random.Range(minY, maxY) + platform[noOfPlatforms - 1].transform.position.y;
+        }
+        else
+        {
+            yPos = Random.Range(minY, maxY) + platform[counter - 1].transform.position.y;
+        }
+        Vector3 pos = new Vector3(xPos, yPos, zPos);
+        return pos;
+    }*/
+
+
+
+    //naive approach to infinte platform which generates platform on colliding and disables previous platforms
+    
+    void Spawn(GameObject go, GameObject prefab)
+    {
+        if (Random.Range(1, 9) == 1)
+        {
+            go.SetActive(false);
+            Instantiate(prefab, new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (9 + Random.Range(0.1f, 2.0f))), Quaternion.identity);
+        }
+        else
+        {
+             go.transform.position = new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (9 + Random.Range(0.1f, 2.0f)));
+            
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        
+        string name = collision.gameObject.name;
 
-        if (collision.gameObject.name.StartsWith("Platform"))
+        switch (name)
         {
-            
-            if (Random.Range(1, 8) == 1)
-            {
-                //disabling instead of destroying objects so as to save memory
-                collision.gameObject.SetActive(false);
-                Instantiate(springPrefab, new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f))), Quaternion.identity);
-
-            }
-            else
-            {
-
-                collision.gameObject.transform.position = new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f)));
-
-            }
-
-        }
-        
-       else if (collision.gameObject.name.StartsWith("Spring"))
-        {
-            if (Random.Range(1, 8) == 1)
-            {
-
-                collision.gameObject.transform.position = new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f)));
-
-            }
-            else
-            {
-
-                collision.gameObject.SetActive(false);
-                Instantiate(platformPrefab, new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f))), Quaternion.identity);
-
-
-            }
-
-        }
-
-        if (collision.gameObject.name.StartsWith("MovingHorizontalPlatform"))
-        {
-            if (Random.Range(1, 8) == 1)
-            {
-                collision.gameObject.SetActive(false);
-                Instantiate(movingHorizontalPrefab, new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f))), Quaternion.identity);
-
-            }
-            else
-            {
-                collision.gameObject.transform.position = new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f)));
-
-            }
-
-        }
-
-        if (collision.gameObject.name.StartsWith("MovingVerticalPlatform"))
-        {
-            if (Random.Range(1, 8) == 1)
-            {
-
-                collision.gameObject.SetActive(false);
-                Instantiate(movingVerticalPrefab, new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f))), Quaternion.identity);
-            }
-            else
-            {
-                collision.gameObject.transform.position = new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f)));
-
-
-            }
-
-        }
-
-        if (collision.gameObject.name.StartsWith("BreakablePlatform"))
-        {
-            if (Random.Range(1, 8) == 1)
-            {
-
-                collision.gameObject.SetActive(false);
-                Instantiate(breakablePrefab, new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f))), Quaternion.identity);
-            }
-            else
-            {
-                collision.gameObject.transform.position = new Vector2(Random.Range(-4.5f, 4.5f), player.transform.position.y + (10 + Random.Range(0.1f, 1.0f)));
-
-
-            }
-
+            case "Platform":
+                Spawn(collision.gameObject, platformPrefab);
+                break;
+            case "Spring":
+                Spawn(collision.gameObject, springPrefab);
+                break;
+            case "MovingHorizontalPlatform":
+                Spawn(collision.gameObject, movingHorizontalPrefab);
+                break;
+            case "MovingVerticalPlatform":
+                Spawn(collision.gameObject, movingVerticalPrefab);
+                break;
+            case "BreakablePlatform":
+                Spawn(collision.gameObject, breakablePrefab);
+                break;
+            default:
+                new System.ArgumentException(nameof(collision));
+                break;
         }
     }
-    
 }

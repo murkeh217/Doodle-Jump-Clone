@@ -8,8 +8,7 @@ public class VerticalMove : MonoBehaviour
     bool moveUp = true;
     void Update()
     {
-
-
+        //to move platform up to down
         if (transform.position.y > 2f)
             moveUp = false;
         if (transform.position.y < -2f)

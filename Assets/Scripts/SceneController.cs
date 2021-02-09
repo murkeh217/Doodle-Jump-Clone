@@ -5,8 +5,6 @@ public class SceneController: MonoBehaviour
 {
     public void Play()
     {
-
         SceneManager.LoadScene("GameScene");
-
     }
 }

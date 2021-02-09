@@ -6,6 +6,7 @@ public class Death : MonoBehaviour
 {
     public Text startText;
 
+    //to make player die on touching this collider
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "Player")

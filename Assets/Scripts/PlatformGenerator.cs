@@ -15,12 +15,10 @@ public class PlatformGenerator : MonoBehaviour
     public GameObject breakablePrefab;
     public GameObject platGen;
 
-    /*
-     * Object pooling implementation
-     *
+
     //public GameObject platformPrefab;
     public List<GameObject> platform;
-    int noOfPlatforms = 20;
+    int noOfPlatforms = 20000;
 
     public float levelWidth = 3f;
     public float minY = .2f;
@@ -34,6 +32,7 @@ public class PlatformGenerator : MonoBehaviour
         mainCam = Camera.main;
         //Platform generate wrt the camera
         counter = 1;
+        
         for (int i = 0; i < noOfPlatforms; i++)
         {
             //putting all prefabs in an array so that they can be accessed randomly
@@ -43,18 +42,21 @@ public class PlatformGenerator : MonoBehaviour
             temp.SetActive(false);
             platform.Add(temp);
         }
-
             platform[0].transform.position = new Vector3(Random.Range(-levelWidth, levelWidth), Random.Range(minY, maxY), 0);
             platform[0].SetActive(true);
-            CreateNextPlatforms(platform[0].transform.position.y);
-        
+            CreateNextPlatforms(platform[0].transform.position.y);        
     }
 
     public void CreateNextPlatforms(float currentPlatformPos)
     {
+        var prefabs = new[] { platformPrefab, springPrefab, movingHorizontalPrefab, movingVerticalPrefab, breakablePrefab };
+        var index = Random.Range(0, prefabs.Length);
+        var temp = Instantiate(prefabs[index]);
+
         int numbers = Random.Range(1, 5);
         for (int i = 0; i <= numbers; i++)
         {
+            Debug.Log(counter + "Counter in if condition");
             if (counter < noOfPlatforms)
             {
                 GameObject plat = platform[counter];
@@ -67,17 +69,19 @@ public class PlatformGenerator : MonoBehaviour
             }
             else
             {
+                Debug.Log(counter + "counter in else");
+
                 counter = 0;
             }
         }
 
-        /*To deactivate the older platforms
+        /*To deactivate the older platforms*/
         for (int i = 0; i < noOfPlatforms; i++)
         {
             GameObject plat = platform[i];
-            if (plat.activeInHierarchy && plat.transform.position.y < currentPlatformPos - 10f)
+            if (plat.activeInHierarchy && plat.transform.position.y < currentPlatformPos - 100f)
             {
-                plat.SetActive(false);
+                plat.SetActive(true);
             }
         }
         Debug.Log(counter);
@@ -89,6 +93,7 @@ public class PlatformGenerator : MonoBehaviour
         float xPos = Random.Range(-levelWidth, levelWidth);
         float zPos = 0f;
         float yPos = 0f;
+        Debug.Log(counter + "counter in getnewpos");
         if (counter < 1)
         {
             yPos = Random.Range(minY, maxY) + platform[noOfPlatforms - 1].transform.position.y;
@@ -99,12 +104,12 @@ public class PlatformGenerator : MonoBehaviour
         }
         Vector3 pos = new Vector3(xPos, yPos, zPos);
         return pos;
-    }*/
+    }
 
-
+/*
 
     //naive approach to infinte platform which generates platform on colliding and disables previous platforms
-    
+
     void Spawn(GameObject go, GameObject prefab)
     {
         if (Random.Range(1, 9) == 1)
@@ -145,5 +150,5 @@ public class PlatformGenerator : MonoBehaviour
                 new System.ArgumentException(nameof(collision));
                 break;
         }
-    }
+    }*/
 }

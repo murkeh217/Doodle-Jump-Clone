@@ -159,6 +159,7 @@ MonoBehaviour:
   startText: {fileID: 1047092200}
   dirX: 0
   moveSpeed: 20
+  platformGenerator: {fileID: 481309064}
 --- !u!50 &128078730
 Rigidbody2D:
   serializedVersion: 4
@@ -430,6 +431,11 @@ MonoBehaviour:
   breakablePrefab: {fileID: 1515338116469946094, guid: af23eeb6649213145a0a6c70d5e65d42,
     type: 3}
   platGen: {fileID: 481309064}
+  platform: []
+  levelWidth: 3
+  minY: 0.2
+  maxY: 1.5
+  mainCam: {fileID: 519420031}
 --- !u!61 &481309067
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ private Rigidbody2D rb2d;
     private float moveInput;
     private float speed = 10f;
 
-    /*
+    
     float prevPlatformPos = 0f;
 
     public GameObject platformGenerator;
@@ -44,7 +44,7 @@ private Rigidbody2D rb2d;
         {
             //playerDie();
         }
-    }*/
+    }
    
     void Start()
     {

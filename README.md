@@ -7,8 +7,7 @@ Features:
 4. Spring Platform
 5. Portal
 6. Accelerometer support
-7. Object Pooling
-8. Score count
-9. Death
-10. Breakable Platform
-11. Moving Platform
+7. Score count
+8. Death
+9. Breakable Platform
+10. Moving Platform

@@ -11,6 +11,7 @@ public class Death : MonoBehaviour
     {
         if (collision.name == "Player")
         {
+            Destroy(this.gameObject);
             Debug.Log("Death triggered");
             startText.gameObject.SetActive(true);
             startText.text = "Game Over!";

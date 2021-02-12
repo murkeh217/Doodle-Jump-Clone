@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
+
 public class CameraController : MonoBehaviour
 {
     public Transform player;
-    public Vector3 offset;
 
+    void Start()
+    {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    }
     void Update()
     {
-        // this will keep camera locked on player and only move along y axis
-        Vector3 position = transform.position;
-        position.y = (player.position + offset).y;
-        //if (transform.position.y < player.position.y)
-            transform.position = position;
+        if (player != null)
+        {
+            if (player.position.y > transform.position.y)
+            {//If y position of characerter is more than of camera's then, move the camera to character's position
+                transform.position = new Vector3(transform.position.x, player.position.y, transform.position.z);
+            }
+        }
     }
 }

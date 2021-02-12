@@ -24,27 +24,24 @@ private Rigidbody2D rb2d;
     private float speed = 10f;
 
     
-    float prevPlatformPos = 0f;
+    //float prevPlatformPos = 0f;
 
-    public GameObject platformGenerator;
+   // public GameObject platformGenerator;
 
+
+    /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
         float currentPlatformPos = collision.transform.position.y;
         if (currentPlatformPos > prevPlatformPos)
         {
-            platformGenerator.GetComponent<PlatformGenerator>().CreateNextPlatforms(currentPlatformPos);
+            platformGenerator.GetComponent<PlatformGenerator>();
             prevPlatformPos = currentPlatformPos;
             //levelGenerator.GetComponent<GameController>().UpdateScore((int)currentPlatformPos);
 
         }
-
-        if (collision.gameObject.name == "Deathplat")
-        {
-            //playerDie();
-        }
-    }
+    }*/
    
     void Start()
     {
@@ -92,9 +89,6 @@ private Rigidbody2D rb2d;
 
         scoreText.text = "Score: " + Mathf.Round(topScore).ToString();
 
-
-
-
     }
 
 
@@ -106,15 +100,16 @@ private Rigidbody2D rb2d;
 
         rb2d.velocity = new Vector2(moveInput * speed, rb2d.velocity.y);
 
+        float x = Input.acceleration.x; //Accelerometer input from user's device
+        transform.Translate(x, 0f, 0f); //Using only x value to make it move left/right
 
-        // to transport player from left to right and right to left
-        if (transform.position.x < leftConstraint - buffer)
-        {
-            transform.position = new Vector3(rightConstraint + buffer, transform.position.y, transform.position.z);
+        if (this.transform.position.x < leftConstraint - buffer)
+        { //If position of character is outside the left frame
+            this.transform.position = new Vector2(rightConstraint + buffer, this.transform.position.y); //Spawn it near the right frame of the screen
         }
-        if (transform.position.x > rightConstraint + buffer)
+        else if (this.transform.position.x > rightConstraint + buffer)
         {
-            transform.position = new Vector3(leftConstraint - buffer, transform.position.y, transform.position.z);
+            this.transform.position = new Vector2(leftConstraint - buffer, this.transform.position.y);
         }
     }
 

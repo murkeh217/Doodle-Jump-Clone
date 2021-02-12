@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class VerticalMove : MonoBehaviour
 {
-    float moveSpeed = 3f;
+    public float moveSpeed = 3f;
     bool moveUp = true;
-    void Update()
+    public float someVal;
+    public GameObject player;
+
+        void Update()
     {
         //to move platform up to down
         if (transform.position.y > 2f)
@@ -18,5 +21,12 @@ public class VerticalMove : MonoBehaviour
             transform.position = new Vector2(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
         else
             transform.position = new Vector2(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
+
+
+        if (player.transform.position.y < (Camera.main.transform.position.y - someVal))
+        {
+            player.SetActive(false);
+        }
+
     }
 }

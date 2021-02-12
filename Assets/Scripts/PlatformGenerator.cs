@@ -18,40 +18,39 @@ public class PlatformGenerator : MonoBehaviour
 
     //public GameObject platformPrefab;
     public List<GameObject> platform;
-    int noOfPlatforms = 20000;
+    int noOfPlatforms = 10;
 
-    public float levelWidth = 3f;
+    public float levelWidth = 5f;
     public float minY = .2f;
-    public float maxY = 1.5f;
+    public float maxY = 4f;
     static int counter;
+    float xPos, yPos;
 
     public Camera mainCam;
 
     void Start()
     {
-        mainCam = Camera.main;
+        mainCam = Camera.main; 
         //Platform generate wrt the camera
-        counter = 1;
-        
+        counter = 0;
         for (int i = 0; i < noOfPlatforms; i++)
         {
             //putting all prefabs in an array so that they can be accessed randomly
             var prefabs = new[] { platformPrefab, springPrefab, movingHorizontalPrefab, movingVerticalPrefab, breakablePrefab };
             var index = Random.Range(0, prefabs.Length);
-            var temp = Instantiate(prefabs[index]);
+            xPos = Random.Range(-levelWidth, levelWidth);
+            yPos = Random.Range(minY, maxY);
+            Vector2 pos = new Vector2(xPos, yPos);
+            var temp = Instantiate(prefabs[index],pos,Quaternion.identity);
             temp.SetActive(false);
             platform.Add(temp);
         }
-            platform[0].transform.position = new Vector3(Random.Range(-levelWidth, levelWidth), Random.Range(minY, maxY), 0);
-            platform[0].SetActive(true);
-            CreateNextPlatforms(platform[0].transform.position.y);        
     }
 
-    public void CreateNextPlatforms(float currentPlatformPos)
+    private void Update()
     {
-        var prefabs = new[] { platformPrefab, springPrefab, movingHorizontalPrefab, movingVerticalPrefab, breakablePrefab };
-        var index = Random.Range(0, prefabs.Length);
-        var temp = Instantiate(prefabs[index]);
+        platform[0].SetActive(false);
+        platform[0].transform.position = new Vector3(Random.Range(-levelWidth, levelWidth), Random.Range(minY, maxY), 0);
 
         int numbers = Random.Range(1, 5);
         for (int i = 0; i <= numbers; i++)
@@ -59,10 +58,10 @@ public class PlatformGenerator : MonoBehaviour
             Debug.Log(counter + "Counter in if condition");
             if (counter < noOfPlatforms)
             {
-                GameObject plat = platform[counter];
+                GameObject plat = platform[i];
                 if (!plat.activeInHierarchy)
                 {
-                    plat.transform.position = GetNewPosition();
+                    plat.transform.position = new Vector3(Random.Range(-levelWidth, levelWidth), Random.Range(minY, maxY), 0);
                     plat.SetActive(true);
                     counter++;
                 }
@@ -79,7 +78,7 @@ public class PlatformGenerator : MonoBehaviour
         for (int i = 0; i < noOfPlatforms; i++)
         {
             GameObject plat = platform[i];
-            if (plat.activeInHierarchy && plat.transform.position.y < currentPlatformPos - 100f)
+            if (plat.activeInHierarchy && plat.transform.position.y < platform[0].transform.position.y - 10f)
             {
                 plat.SetActive(true);
             }

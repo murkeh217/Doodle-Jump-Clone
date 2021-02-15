@@ -1,6 +1,5 @@
 # Doodle-Jump-Clone
-Doodle Jump Clone made in Unity with many features
-Features:
+Doodle Jump Clone made in Unity with many features:
 1. Doodler
 2. Platforms
 3. Bouciness

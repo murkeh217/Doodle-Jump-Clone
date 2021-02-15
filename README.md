@@ -1,12 +1,13 @@
 # Doodle-Jump-Clone
 Doodle Jump Clone made in Unity with many features:
-1. Doodler
-2. Platforms
-3. Bouciness
-4. Spring Platform
-5. Portal
-6. Accelerometer support
-7. Score count
-8. Death
-9. Breakable Platform
-10. Moving Platform
+
+![](dj.gif)
+
+1. Bouciness
+2. Spring Platform
+3. Portal
+4. Accelerometer support
+5. Score count
+6. Death
+7. Breakable Platform
+8. Moving Platform

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour {
 
 	public float xRange;
-	public float yMin = 0.1f;
+	public float yMin = 0.01f;
 	public float yMax=1f;
 	public float xPos,yPos;
 
@@ -14,7 +14,7 @@ public class PlatformSpawner : MonoBehaviour {
 	public int arraySize;
 	private int currentPlat;
 
-	public float TimeToReuse=1f;
+	public float TimeToReuse=10f;
 	public float time;
 
 	void Start () {

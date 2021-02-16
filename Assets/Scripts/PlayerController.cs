@@ -12,7 +12,7 @@ private Rigidbody2D rb2d;
     public Text startText;
 
     public float dirX;
-    public float moveSpeed = 30f;
+    public float playerMoveSpeed = 30f;
 
     float leftConstraint = Screen.width;
     float rightConstraint = Screen.width;
@@ -22,27 +22,7 @@ private Rigidbody2D rb2d;
 
     private float moveInput;
     private float speed = 10f;
-
-    
-    //float prevPlatformPos = 0f;
-
-   // public GameObject platformGenerator;
-
-
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        float currentPlatformPos = collision.transform.position.y;
-        if (currentPlatformPos > prevPlatformPos)
-        {
-            platformGenerator.GetComponent<PlatformGenerator>();
-            prevPlatformPos = currentPlatformPos;
-            //levelGenerator.GetComponent<GameController>().UpdateScore((int)currentPlatformPos);
-
-        }
-    }*/
-   
+  
     void Start()
     {
 
@@ -66,7 +46,7 @@ private Rigidbody2D rb2d;
         rb2d.gravityScale = 5f;
 
         //movement and animation handling of player
-        dirX = Input.acceleration.x * moveSpeed;
+        dirX = Input.acceleration.x * playerMoveSpeed;
         transform.Translate(new Vector2(dirX, 0f) * Time.deltaTime);
 
 

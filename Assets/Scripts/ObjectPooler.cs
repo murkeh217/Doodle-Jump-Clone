@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-	public static ObjectPooler Instance { get; private set;}
-	private void Awake()
-	{
-		Instance = this;
-	}
 
 	GameObject platforms;
-	public int[] prob = { 8, 2, 4 }; //Pobability of each type of platforms.Used below in weighted random  number generator
+	public int[] prob = { 8, 2, 4, 3, 5 }; //Probability of each type of platforms.Used below in weighted random  number generator
 
 	[System.Serializable] //Serializable so that visible in Inspectoer and can be manually edited there.
 	public class PrefabsData //Holds prefab of different types of platforms and their total count to be used
@@ -28,7 +23,7 @@ public class ObjectPooler : MonoBehaviour
 	public float xPos, yPos = 0.1f; //Values used
 	public float xRange = 2;      //for randomising 
 	public float yMin = 0.01f;   //platform
-	public float yMax = 1;     //locations
+	public float yMax = 2;     //locations
 
 	public void Start()
 	{
@@ -79,7 +74,7 @@ public class ObjectPooler : MonoBehaviour
 			But in next iteration, random < sum, 4 < 5. Thus,we return B.
 
 		*/
-		int ind = Random.Range(0, 100);
+		int ind = Random.Range(0, 400);
 		print(ind + "index");
 		int cummulative = 0;
 		for (int i = 0; i < prob.Length; i++)

@@ -8,19 +8,20 @@ public class BigBounce : MonoBehaviour
 
     public GameObject player;
 
-    public static BigBounce Instance;
-    private void Awake()
-    {
-        Instance = this;
-    }
     private void Update()
     {
-        if (player.transform.position.y < (Camera.main.transform.position.y - someVal))
+        if (gameObject.transform.position.y + someVal < Camera.main.transform.position.y)
         {
-            player.SetActive(false);
+            StartCoroutine(Delay());
         }
     }
-        private void OnCollisionEnter2D(Collision2D collision)
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         //this bounce is bit greater than normal bounce
         if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.y <= 0)

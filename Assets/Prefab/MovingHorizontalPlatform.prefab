@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   someVal: 5
-  player: {fileID: 0}
 --- !u!61 &415043484000733304
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -159,4 +158,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   someVal: 50
-  player: {fileID: 0}
+  player: {fileID: 7312761591151174232, guid: 94929ef205dffe043b91323003ce0af0, type: 3}

@@ -8,10 +8,16 @@ public class Breakable : MonoBehaviour
     public float someVal;
     private void Update()
     {
-        if (player.transform.position.y < (Camera.main.transform.position.y - someVal))
+        if (gameObject.transform.position.y + someVal < Camera.main.transform.position.y)
         {
-            player.SetActive(false);
+            StartCoroutine(Delay());
         }
+
+    }
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
 
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -19,7 +25,7 @@ public class Breakable : MonoBehaviour
 		//destroy platform on collision with player
 		if (collision.gameObject.name=="Player")
 		{
-			Destroy(gameObject);
+            gameObject.SetActive(false);
 		}
 	}
 }

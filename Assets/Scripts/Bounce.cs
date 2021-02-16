@@ -1,22 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 public class Bounce : MonoBehaviour
 {
     public float someVal;
 
-    //public GameObject platform;
+    public GameObject platform;
 
-    public static Bounce Instance { get; private set; }
-
-    private void Awake()
-    {
-        Instance = this;
-    }
     private void Update()
     {
-        if (gameObject.transform.position.y + someVal <= Camera.main.transform.position.y)
-        {
-            gameObject.SetActive(false);
-        }
+        if (gameObject.transform.position.y + someVal < Camera.main.transform.position.y)
+            {
+                StartCoroutine(Delay());
+            }
+        
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
 
     }
     private void OnCollisionEnter2D(Collision2D collision)

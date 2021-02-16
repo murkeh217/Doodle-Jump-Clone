@@ -21,10 +21,16 @@ public class HorizontalMove: MonoBehaviour
 				else
 					transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
 
-		if (player.transform.position.y < (Camera.main.transform.position.y - someVal))
+		if (gameObject.transform.position.y + someVal < Camera.main.transform.position.y)
 		{
-			player.SetActive(false);
+			StartCoroutine(Delay());
 		}
+
+	}
+	IEnumerator Delay()
+	{
+		yield return new WaitForSeconds(1f);
+		gameObject.SetActive(false);
 
 	}
 }

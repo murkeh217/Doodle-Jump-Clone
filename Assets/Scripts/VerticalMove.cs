@@ -23,10 +23,16 @@ public class VerticalMove : MonoBehaviour
             transform.position = new Vector2(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
 
 
-        if (player.transform.position.y < (Camera.main.transform.position.y - someVal))
+        if (gameObject.transform.position.y + someVal < Camera.main.transform.position.y)
         {
-            player.SetActive(false);
+            StartCoroutine(Delay());
         }
+
+    }
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
 
     }
 }
